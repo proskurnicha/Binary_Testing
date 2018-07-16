@@ -9,8 +9,8 @@ namespace Binary_Project_Structure_BLL.Interfaces
     {
         List<TicketDto> GetAll();
         TicketDto GetById(int id);
-        void Create(TicketDto entity);
-        void Update(TicketDto entity);
+        TicketDto Create(TicketDto entity);
+        TicketDto Update(TicketDto entity);
         bool Delete(int id);
     }
 }

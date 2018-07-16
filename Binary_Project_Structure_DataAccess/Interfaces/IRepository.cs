@@ -11,9 +11,9 @@ namespace Binary_Project_Structure_DataAccess.Interfaces
 
         TEntity GetById(Func<TEntity, bool> filter = null);
 
-        void Create(TEntity entity);
+        TEntity Create(TEntity entity);
 
-        void Update(TEntity id);
+        TEntity Update(TEntity id);
 
         bool Delete(Predicate<TEntity> prEntity);
     }

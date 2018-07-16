@@ -13,6 +13,11 @@ namespace Binary_Project_Structure_BLL.Services
 {
     public class TicketService : Service, ITicketService
     {
+        public TicketService(IUnitOfWork context) : base(context)
+        {
+
+        }
+
         public List<TicketDto> GetAll()
         {
             return GetAll<Ticket, TicketDto>();
@@ -23,14 +28,14 @@ namespace Binary_Project_Structure_BLL.Services
             return GetById<Ticket, TicketDto>(x => x.Id == id);
         }
 
-        public void Create(TicketDto entity)
+        public TicketDto Create(TicketDto entity)
         {
-            Create<TicketDto, Ticket>(entity);
+            return Create<TicketDto, Ticket>(entity);
         }
 
-        public void Update(TicketDto entity)
+        public TicketDto Update(TicketDto entity)
         {
-            Update<TicketDto, Ticket>(entity);
+            return Update<TicketDto, Ticket>(entity);
         }
 
         bool ITicketService.Delete(int id)

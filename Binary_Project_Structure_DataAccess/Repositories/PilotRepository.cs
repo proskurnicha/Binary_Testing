@@ -7,7 +7,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class PilotRepository : Repository<Pilot>
     {
-        public override void Update(Pilot entity)
+        public override Pilot Update(Pilot entity)
         {
             Func<Pilot, bool> filter = x => x.Id == entity.Id;
             Pilot pilot = base.GetById(filter);
@@ -15,6 +15,8 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             pilot.Experience = entity.Experience;
             pilot.Name = entity.Name;
             pilot.Surname = entity.Surname;
+            return pilot;
+
         }
     }
 }

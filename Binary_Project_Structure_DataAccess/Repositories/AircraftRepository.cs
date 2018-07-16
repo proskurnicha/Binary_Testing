@@ -8,7 +8,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class AircraftRepository : Repository<Aircraft>
     {
-        public override void Update(Aircraft entity)
+        public override Aircraft Update(Aircraft entity)
         {
             Func<Aircraft, bool> filter = x => x.Id == entity.Id;
             Aircraft aircraft = base.GetById(filter);
@@ -17,6 +17,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             aircraft.Lifetime = entity.Lifetime;
             aircraft.TypeAircraftId = entity.TypeAircraftId;
             aircraft.TypeAircraft = context.Set<TypeAircraft>().Where(x => x.Id == entity.TypeAircraftId).FirstOrDefault();
+            return base.GetById(filter);
         }
     }
 }

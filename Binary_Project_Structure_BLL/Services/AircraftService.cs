@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Binary_Project_Structure_BLL.Interfaces;
+using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_Shared.DTOs;
 
@@ -9,6 +10,10 @@ namespace Binary_Project_Structure_BLL.Services
 {
     public class AircraftService : Service, IAircraftService
     {
+        public AircraftService(IUnitOfWork context) : base(context)
+        {
+
+        }
         public List<AircraftDto> GetAll()
         {
             return GetAll<Aircraft, AircraftDto>();
@@ -19,14 +24,14 @@ namespace Binary_Project_Structure_BLL.Services
             return GetById<Aircraft, AircraftDto>(x => x.Id == id);
         }
 
-        public void Create(AircraftDto entity)
+        public AircraftDto Create(AircraftDto entity)
         {
-            Create<AircraftDto, Aircraft>(entity);
+            return Create<AircraftDto, Aircraft>(entity);
         }
 
-        public void Update(AircraftDto entity)
+        public AircraftDto Update(AircraftDto entity)
         {
-            Update<AircraftDto, Aircraft>(entity);
+            return Update<AircraftDto, Aircraft>(entity);
         }
 
         bool IAircraftService.Delete(int id)

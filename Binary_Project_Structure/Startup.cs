@@ -17,6 +17,8 @@ using Ninject.Infrastructure.Disposal;
 using AutoMapper;
 using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_Shared.DTOs;
+using Binary_Project_Structure_DataAccess.Interfaces;
+using Binary_Project_Structure_DataAccess.UnitOfWork;
 
 namespace Binary_Project_Structure
 {
@@ -41,7 +43,7 @@ namespace Binary_Project_Structure
             services.AddTransient<IStewardessService, StewardessService>();
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<ITypeAircraftService, TypeAircraftService>();
-
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

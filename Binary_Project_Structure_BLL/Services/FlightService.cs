@@ -13,6 +13,10 @@ namespace Binary_Project_Structure_BLL.Services
 {
     public class FlightService : Service, IFlightService 
     {
+        public FlightService(IUnitOfWork context) : base(context)
+        {
+
+        }
         public List<FlightDto> GetAll()
         {
             return GetAll<Flight, FlightDto>();
@@ -23,14 +27,14 @@ namespace Binary_Project_Structure_BLL.Services
             return GetById<Flight, FlightDto>(x => x.Id == id);
         }
 
-        public void Create(FlightDto entity)
+        public FlightDto Create(FlightDto entity)
         {
-            Create<FlightDto, Flight>(entity);
+            return Create<FlightDto, Flight>(entity);
         }
 
-        public void Update(FlightDto entity)
+        public FlightDto Update(FlightDto entity)
         {
-            Update<FlightDto, Flight>(entity);
+            return Update<FlightDto, Flight>(entity);
         }
         
         bool IFlightService.Delete(int id)

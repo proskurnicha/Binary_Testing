@@ -15,7 +15,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             return context.Set<Crew>().Include(s => s.Stewardesses).ToList();
         }
 
-        public override void Update(Crew entity)
+        public override Crew Update(Crew entity)
         {
             Func<Crew, bool> filter = x => x.Id == entity.Id;
             Crew crew = base.GetById(filter);
@@ -24,6 +24,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
 
             crew.Pilot = context.Set<Pilot>().Where(x => x.Id == entity.PilotId).FirstOrDefault();
             crew.Stewardesses = entity.Stewardesses;
+            return crew;
         }
     }
 }

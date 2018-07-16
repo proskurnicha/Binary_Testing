@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Binary_Project_Structure_BLL.Interfaces;
+using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_Shared.DTOs;
 
@@ -9,6 +10,11 @@ namespace Binary_Project_Structure_BLL.Services
 {
     public class StewardessService : Service, IStewardessService
     {
+        public StewardessService(IUnitOfWork context) : base(context)
+        {
+
+        }
+
         public List<StewardessDto> GetAll()
         {
             return GetAll<Stewardess, StewardessDto>();
@@ -19,14 +25,14 @@ namespace Binary_Project_Structure_BLL.Services
             return GetById<Stewardess, StewardessDto>(x => x.Id == id);
         }
 
-        public void Create(StewardessDto entity)
+        public StewardessDto Create(StewardessDto entity)
         {
-            Create<StewardessDto, Stewardess>(entity);
+            return Create<StewardessDto, Stewardess>(entity);
         }
 
-        public void Update(StewardessDto entity)
+        public StewardessDto Update(StewardessDto entity)
         {
-            Update<StewardessDto, Stewardess>(entity);
+            return  Update<StewardessDto, Stewardess>(entity);
         }
 
         bool IStewardessService.Delete(int id)

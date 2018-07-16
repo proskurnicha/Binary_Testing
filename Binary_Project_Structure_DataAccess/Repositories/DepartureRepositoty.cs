@@ -9,7 +9,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class DepartureRepositoty : Repository<Departure>
     {
-        public override void Update(Departure entity)
+        public override Departure Update(Departure entity)
         {
             Func<Departure, bool> filter = x => x.Id == entity.Id;
             Departure departure = base.GetById(filter);
@@ -20,6 +20,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             departure.DepartureTime = entity.DepartureTime;
             departure.FlightId = entity.FlightId;
             departure.Flight = context.Set<Flight>().Where(x => x.Id == entity.FlightId).FirstOrDefault();
+            return departure;
         }
     }
 }

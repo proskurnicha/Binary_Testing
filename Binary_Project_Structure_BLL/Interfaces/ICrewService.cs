@@ -9,8 +9,8 @@ namespace Binary_Project_Structure_BLL.Interfaces
     {
         List<CrewDto> GetAll();
         CrewDto GetById(int id);
-        void Create(CrewDto entity);
-        void Update(CrewDto entity);
+        CrewDto Create(CrewDto entity);
+        CrewDto Update(CrewDto entity);
         bool Delete(int id);
     }
 }

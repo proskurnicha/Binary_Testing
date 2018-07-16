@@ -16,11 +16,12 @@ namespace Binary_Project_Structure_BLL.Services
         IMapper iMapper;
         public IUnitOfWork context { get; private set; }
 
-        public Service()
+        public Service(IUnitOfWork context)
         {
-            IKernel ninjectKernel = new StandardKernel();
-            ninjectKernel.Bind<IUnitOfWork>().To<UnitOfWork>();
-            context = ninjectKernel.Get<IUnitOfWork>();
+            this.context = context;
+            //IKernel ninjectKernel = new StandardKernel();
+            //ninjectKernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            //context = ninjectKernel.Get<IUnitOfWork>();
             MapperInitializer initializer = new MapperInitializer();
             iMapper = initializer.Initialize();
         }
@@ -35,18 +36,22 @@ namespace Binary_Project_Structure_BLL.Services
             return iMapper.Map<TEntity, TEntityDto>(context.Set<IRepository<TEntity>>().GetById(filter));
         }
 
-        public void Update<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class
+        public TEntityDto Update<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class
         {
             TEntity entity = iMapper.Map<TEntityDto, TEntity>(entityDto);
-            context.Set<IRepository<TEntity>>().Update(entity);
+            TEntityDto entitySaved = iMapper.Map<TEntity, TEntityDto> (context.Set<IRepository<TEntity>>().Update(entity));
             context.SaveChages();
+            return entitySaved;
         }
 
-        public void Create<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class
+        public TEntityDto Create<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class
         {
             TEntity entity = iMapper.Map<TEntityDto, TEntity>(entityDto);
-            context.Set<IRepository<TEntity>>().Create(entity);
+            IRepository<TEntity> entities = context.Set<IRepository<TEntity>>();
+            TEntity entityCreated = entities.Create(entity);
+            TEntityDto entityCreatedDto = iMapper.Map<TEntity, TEntityDto>(entityCreated);
             context.SaveChages();
+            return entityCreatedDto;
         }
 
         public bool Delete<TEntity>(Predicate<TEntity> prEntity) where TEntity : class

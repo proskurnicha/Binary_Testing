@@ -15,7 +15,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             return context.Set<Flight>().Include(s => s.Tickets).ToList();
         }
 
-        public override void Update(Flight entity)
+        public override Flight Update(Flight entity)
         {
             Func<Flight, bool> filter = x => x.Id == entity.Id;
             Flight flight = base.GetById(filter);
@@ -24,6 +24,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             flight.DeparturePoint = entity.DeparturePoint;
             flight.DepartureTime = entity.DepartureTime;
             flight.Tickets = entity.Tickets;
+            return flight;
         }
     }
 }

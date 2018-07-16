@@ -9,13 +9,14 @@ namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class TicketRepository : Repository<Ticket>
     {
-        public override void Update(Ticket entity)
+        public override Ticket Update(Ticket entity)
         {
             Func<Ticket, bool> filter = x => x.Id == entity.Id;
             Ticket ticket = base.GetById(filter);
             ticket.Price = entity.Price;
             ticket.FlightId = entity.FlightId;
             ticket.Flight = context.Set<Flight>().Where(flight => flight.Id == entity.FlightId).FirstOrDefault();
+            return ticket;
         }
     }
 }

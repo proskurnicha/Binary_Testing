@@ -42,14 +42,15 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             return query.Where(filter).First();
         }
 
-        public virtual void Create(TEntity entity)
+        public virtual TEntity Create(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
+            return entity;
         }
 
-        public virtual void Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity)
         {
-
+            return null;
         }
 
         public virtual bool Delete(Predicate<TEntity> prEntity)
