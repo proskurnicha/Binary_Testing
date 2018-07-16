@@ -39,6 +39,10 @@ namespace Binary_Project_Structure_BLL.Services
         public TEntityDto Update<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class
         {
             TEntity entity = iMapper.Map<TEntityDto, TEntity>(entityDto);
+            
+            if (entity == null)
+                throw new NullReferenceException();
+
             TEntityDto entitySaved = iMapper.Map<TEntity, TEntityDto> (context.Set<IRepository<TEntity>>().Update(entity));
             context.SaveChages();
             return entitySaved;
@@ -47,9 +51,13 @@ namespace Binary_Project_Structure_BLL.Services
         public TEntityDto Create<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class
         {
             TEntity entity = iMapper.Map<TEntityDto, TEntity>(entityDto);
-            IRepository<TEntity> entities = context.Set<IRepository<TEntity>>();
-            TEntity entityCreated = entities.Create(entity);
-            TEntityDto entityCreatedDto = iMapper.Map<TEntity, TEntityDto>(entityCreated);
+
+            if (entity == null)
+                throw new NullReferenceException();
+
+            TEntity entityAdded = context.Set<IRepository<TEntity>>().Create(entity);
+
+            TEntityDto entityCreatedDto = iMapper.Map<TEntity, TEntityDto>(entityAdded);
             context.SaveChages();
             return entityCreatedDto;
         }
