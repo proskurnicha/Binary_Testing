@@ -12,6 +12,6 @@ namespace Binary_Project_Structure_BLL.Interfaces
         TEntityDto GetById<TEntity, TEntityDto>(Func<TEntity, bool> filter = null) where TEntity : class;
         TEntityDto Update<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class;
         TEntityDto Create<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class;
-        bool Delete<TEntity>(Predicate<TEntity> prEntity) where TEntity : class;
+        bool Delete<TEntity>(Func<TEntity, bool> prEntity = null) where TEntity : class;
     }
 }

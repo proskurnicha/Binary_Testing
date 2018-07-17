@@ -19,6 +19,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<Crew, bool> filter = x => x.Id == entity.Id;
             Crew crew = base.GetById(filter);
+
+            if (crew == null)
+                return null;
+
             crew.PilotId = entity.PilotId;
             var query = context.Set<Pilot>().Where(x => x.Id == entity.PilotId);
 

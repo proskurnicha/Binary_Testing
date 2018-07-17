@@ -11,6 +11,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<Pilot, bool> filter = x => x.Id == entity.Id;
             Pilot pilot = base.GetById(filter);
+
+            if (pilot == null)
+                return null;
+
             pilot.DateBirth = entity.DateBirth;
             pilot.Experience = entity.Experience;
             pilot.Name = entity.Name;

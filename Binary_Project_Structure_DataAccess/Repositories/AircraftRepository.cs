@@ -12,6 +12,8 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<Aircraft, bool> filter = x => x.Id == entity.Id;
             Aircraft aircraft = base.GetById(filter);
+            if (aircraft == null)
+                return null;
             aircraft.AircraftName = entity.AircraftName;
             aircraft.DateRelease = entity.DateRelease;
             aircraft.Lifetime = entity.Lifetime;

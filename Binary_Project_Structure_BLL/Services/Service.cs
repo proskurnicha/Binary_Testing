@@ -2,7 +2,6 @@
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
-using Binary_Project_Structure_DataAccess.UnitOfWork;
 using Binary_Project_Structure_Shared.DTOs;
 using Ninject;
 using System;
@@ -44,7 +43,6 @@ namespace Binary_Project_Structure_BLL.Services
                 throw new NullReferenceException();
 
             TEntityDto entitySaved = iMapper.Map<TEntity, TEntityDto> (context.Set<IRepository<TEntity>>().Update(entity));
-            context.SaveChages();
             return entitySaved;
         }
 
@@ -62,10 +60,9 @@ namespace Binary_Project_Structure_BLL.Services
             return entityCreatedDto;
         }
 
-        public bool Delete<TEntity>(Predicate<TEntity> prEntity) where TEntity : class
+        public bool Delete<TEntity>(Func<TEntity, bool> prEntity) where TEntity : class
         {
             bool result = context.Set<IRepository<TEntity>>().Delete(prEntity);
-            context.SaveChages();
             return result;
         }
     }

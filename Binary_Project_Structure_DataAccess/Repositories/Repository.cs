@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Binary_Project_Structure_DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -45,7 +47,8 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         public virtual TEntity Create(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
-            return entity;
+            int result = context.SaveChanges();
+            return context.Set<TEntity>().LastOrDefault(); ;
         }
 
         public virtual TEntity Update(TEntity entity)
@@ -53,17 +56,17 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             return null;
         }
 
-        public virtual bool Delete(Predicate<TEntity> prEntity)
+        public virtual bool Delete(Func<TEntity, bool> prEntity = null)
         {
-            TEntity entity = context.Set<TEntity>().Find(prEntity);
+            TEntity entity = context.Set<TEntity>().FirstOrDefault(prEntity);
 
-            if (entity != null)
-            {
-                List<TEntity> entities = context.Set<TEntity>().ToList();
-                entities.Remove(entity);
-                return true;
-            }
-            return false;
+            if (entity == null)
+                return false;
+
+            List<TEntity> entities = context.Set<TEntity>().ToList();
+            entities.Remove(entity);
+            context.SaveChanges();
+            return true;
         }
     }
 }

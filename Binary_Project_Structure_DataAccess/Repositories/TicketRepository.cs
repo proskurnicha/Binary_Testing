@@ -13,6 +13,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<Ticket, bool> filter = x => x.Id == entity.Id;
             Ticket ticket = base.GetById(filter);
+
+            if (ticket == null)
+                return null;
+
             ticket.Price = entity.Price;
             ticket.FlightId = entity.FlightId;
             ticket.Flight = context.Set<Flight>().Where(flight => flight.Id == entity.FlightId).FirstOrDefault();

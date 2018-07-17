@@ -7,7 +7,6 @@ using Binary_Project_Structure_Shared.DTOs;
 using Binary_Project_Structure_DataAccess.Models;
 using AutoMapper;
 using Ninject;
-using Binary_Project_Structure_DataAccess.UnitOfWork;
 
 namespace Binary_Project_Structure_BLL.Services
 {

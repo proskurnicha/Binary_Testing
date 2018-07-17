@@ -19,6 +19,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<Flight, bool> filter = x => x.Id == entity.Id;
             Flight flight = base.GetById(filter);
+
+            if (flight == null)
+                return null;
+
             flight.ArrivalPoint = entity.ArrivalPoint;
             flight.ArrivalTime = entity.ArrivalTime;
             flight.DeparturePoint = entity.DeparturePoint;

@@ -13,7 +13,7 @@ namespace Binary_Project_Structur.Tests.Fake
             return entity;
         }
 
-        public bool Delete(Predicate<TEntity> prEntity)
+        public bool Delete(Func<TEntity, bool> prEntity = null)
         {
             throw new NotImplementedException();
         }

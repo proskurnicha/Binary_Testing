@@ -12,6 +12,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<Stewardess, bool> filter = x => x.Id == entity.Id;
             Stewardess stewardess = base.GetById(filter);
+            
+            if (stewardess == null)
+                return null;
+
             stewardess.DateBirth = entity.DateBirth;
             stewardess.Name = entity.Name;
             stewardess.Surname = entity.Surname;

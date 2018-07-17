@@ -15,6 +15,6 @@ namespace Binary_Project_Structure_DataAccess.Interfaces
 
         TEntity Update(TEntity id);
 
-        bool Delete(Predicate<TEntity> prEntity);
+        bool Delete(Func<TEntity, bool> prEntity = null);
     }
 }

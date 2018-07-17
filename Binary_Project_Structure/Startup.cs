@@ -18,7 +18,7 @@ using AutoMapper;
 using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_Shared.DTOs;
 using Binary_Project_Structure_DataAccess.Interfaces;
-using Binary_Project_Structure_DataAccess.UnitOfWork;
+using Binary_Project_Structure_DataAccess;
 
 namespace Binary_Project_Structure
 {

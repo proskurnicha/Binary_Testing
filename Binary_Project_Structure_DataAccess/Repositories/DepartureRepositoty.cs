@@ -13,6 +13,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<Departure, bool> filter = x => x.Id == entity.Id;
             Departure departure = base.GetById(filter);
+
+            if (departure == null)
+                return null;
+
             departure.AircraftId = entity.AircraftId;
             departure.Aircraft  = context.Set<Aircraft>().Where(x => x.Id == entity.AircraftId).FirstOrDefault();
             departure.CrewId = entity.CrewId;

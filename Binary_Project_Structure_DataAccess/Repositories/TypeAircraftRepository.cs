@@ -12,6 +12,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
         {
             Func<TypeAircraft, bool> filter = x => x.Id == entity.Id;
             TypeAircraft typeAircraft = base.GetById(filter);
+            
+            if (typeAircraft == null)
+                return null;
+
             typeAircraft.NumberPlaces = entity.NumberPlaces;
             typeAircraft.AircraftModel = entity.AircraftModel;
             typeAircraft.CarryingCapacity = entity.CarryingCapacity;
