@@ -73,19 +73,7 @@ namespace Binary_Project_Structur.Tests.ControllerTests
             IActionResult result = aircraftsController.Put(0, null);
             Assert.True(result is BadRequestObjectResult);
         }
-
-        [Test]
-        public void Put_WhenValidAircraft_ReturnOk()
-        {
-            AircraftDto aircraft = new AircraftDto()
-            {
-                Id = 1
-            };
-            A.CallTo(() => service.Update(aircraft)).Returns(aircraft);
-            IActionResult result = aircraftsController.Put(1, aircraft);
-            Assert.True(result is OkObjectResult);
-        }
-
+        
         [Test]
         public void Delete_WhenNull_ReturNoFound()
         {

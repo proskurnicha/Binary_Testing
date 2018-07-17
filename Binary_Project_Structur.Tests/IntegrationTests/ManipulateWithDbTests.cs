@@ -16,10 +16,14 @@ namespace Binary_Project_Structur.Tests.IntegrationTests
     [TestFixture]
     public class ManipulateWithDbTests
     {
+        FlightService serviceFlight;
         AircraftService service;
+        UnitOfWork uow;
         public ManipulateWithDbTests()
         {
-            service = new AircraftService(new UnitOfWork());
+            uow = new UnitOfWork();
+            service = new AircraftService(uow);
+            serviceFlight = new FlightService(uow);
         }
         [Test]
         public void CreateAircraft_WhenAircraftValid_ReturnNewAircraft()
@@ -62,6 +66,27 @@ namespace Binary_Project_Structur.Tests.IntegrationTests
                 TypeAircraftId = 1000
             };
             AircraftDto aircraftDtoSaved = service.Create(aircraft);
+        }
+
+        [Test]
+        public void CreateFlight_WhenFlightValid_ReturnNewFlight()
+        {
+            FlightDto flight = new FlightDto()
+            {
+                ArrivalPoint = "Test",
+                DeparturePoint = "Test",
+                ArrivalTime = new TimeSpan(),
+                DepartureTime = new TimeSpan(),
+                Tickets = new List<TicketDto>()
+            };
+            FlightDto flightDtoSaved = serviceFlight.Create(flight);
+
+            Assert.AreEqual(flight.ArrivalPoint, flight.ArrivalPoint);
+            Assert.AreEqual(flight.DeparturePoint, flight.DeparturePoint);
+
+            bool result = serviceFlight.Delete<Aircraft>(aircr => aircr.Id == flightDtoSaved.Id);
+
+            Assert.IsTrue(result);
         }
 
         [Test]
