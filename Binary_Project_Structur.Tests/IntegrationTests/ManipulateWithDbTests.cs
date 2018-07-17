@@ -137,7 +137,7 @@ namespace Binary_Project_Structur.Tests.IntegrationTests
         }
 
         [Test]
-        public void UpdateAircraft_WhenAircraftIdInvalid_ReturnExeption()
+        public void UpdateAircraft_WhenAircraftIdInvalid_ReturnNull()
         {
             int count = service.GetAll().Count();
             AircraftDto aircraft = new AircraftDto()
@@ -149,6 +149,21 @@ namespace Binary_Project_Structur.Tests.IntegrationTests
 
             AircraftDto aircraftDtoUpdated = service.Update<AircraftDto, Aircraft>(aircraft);
             Assert.IsNull(aircraftDtoUpdated);
+        }
+
+        [Test]
+        public void UpdateAircraft_WhenAircraftIdInvalid_ReturnExeption()
+        {
+            int count = serviceFlight.GetAll().Count();
+            FlightDto flight = new FlightDto()
+            {
+                Id = count + 1,
+                DeparturePoint = "TEST",
+                ArrivalPoint = "Test"
+            };
+
+            FlightDto flightDtoUpdated = service.Update<FlightDto, Flight>(flight);
+            Assert.IsNull(flightDtoUpdated);
         }
     }
 }
